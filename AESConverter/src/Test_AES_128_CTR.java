@@ -2,7 +2,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import java.io.*;
 
-public class Test {
+public class Test_AES_128_CTR {
 
     static final File inputFile = new File(
             ".\\resources\\EMS_DE_DB_9180540618423_20011217T093500_Response_IV_416c6d61766976614032303231213f5f.xml");
@@ -40,7 +40,6 @@ public class Test {
 
             String codedString = AES_128_CTR_Converter.encodeString(key, iv, CIPHER_ALGORITHM, str);
             String decodedString = AES_128_CTR_Converter.decodeString(key, iv, CIPHER_ALGORITHM, codedString);
-
 
             System.out.println("File trasformato in stringa, codificato:\n"+codedString+"\n");
             System.out.println("File trasformato in stringa codificato, decodificato:\n"+decodedString);
