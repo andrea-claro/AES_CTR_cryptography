@@ -7,8 +7,8 @@ import java.io.FileReader;
 
 public class Test_AES_256_CBC {
 
-    private static final String SECURE_KEY = "DBF3C21770D81FE133C4D8C39103425C7797E0C79966CD27";
-    private static final String IV = "2520F776B1D062E909C94B6DD7D600EE";
+    private static final String SECURE_KEY = "72B894FC6F9CD2BCC63CFF33DFC0CE33DA2BB5FE86E4703721DA670DEF9CC3B4";
+    private static final String IV = "15C17719D893F6CDC05914948345614A";
 
     private static final String CIPHER_ALGORITHM = "AES/CBC/PKCS5PADDING";
     private static final String SECURE_KEY_ALGORITHM = "AES";
