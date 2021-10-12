@@ -1,9 +1,10 @@
+import org.codehaus.jettison.json.JSONObject;
+
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 public class Test_AES_256_CBC {
 
@@ -15,19 +16,29 @@ public class Test_AES_256_CBC {
 
     public static void main(String[] args) {
 
-        try{
+        try {
             SecretKey key = AES_256_CBC_Converter.generateKeyFromHexString(SECURE_KEY, SECURE_KEY_ALGORITHM);
             IvParameterSpec iv = AES_256_CBC_Converter.generateIVFromHexString(IV);
 
-            String str = "Almaviva digitaltec";
+            String input = new String(Files.readAllBytes(Paths.get("resources/snap_test.txt")));
 
-            String codedString = AES_256_CBC_Converter.encodeString(key, iv, CIPHER_ALGORITHM, str);
-            String decodedString = AES_256_CBC_Converter.decodeString(key, iv, CIPHER_ALGORITHM, codedString);
+            byte[] codedString = AES_256_CBC_Converter.encodeString(key, iv, CIPHER_ALGORITHM, input);
+            Files.write(Paths.get("resources/snap_byte.txt"), codedString);
 
-            System.out.println(codedString);
-            System.out.println(decodedString);
+            String newString = new String(codedString);
+            String base64String = Base64.getEncoder().encodeToString(codedString);
+            //System.out.println(newString);
+            //System.out.println(base64String);
 
-        } catch(Exception e){
+            String decodedString = AES_256_CBC_Converter.decodeString(key, iv, CIPHER_ALGORITHM, base64String);
+            //System.out.println(decodedString);
+
+            JSONObject jo = new JSONObject();
+            jo.put("StringaByte", newString);
+
+            System.out.println(jo.getString("StringaByte"));
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

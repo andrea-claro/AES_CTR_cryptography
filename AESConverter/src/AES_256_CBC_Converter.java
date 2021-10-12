@@ -2,8 +2,6 @@ import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -11,16 +9,21 @@ import java.util.Base64;
 
 public class AES_256_CBC_Converter {
 
-    public static String encodeString(SecretKey key, IvParameterSpec iv, String algorithm, String input) throws
+    public static byte[] encodeString(SecretKey key, IvParameterSpec iv, String algorithm, String input) throws
             NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException,
             BadPaddingException, IllegalBlockSizeException {
 
         Cipher cipher = Cipher.getInstance(algorithm);
         cipher.init(Cipher.ENCRYPT_MODE, key, iv);
 
+/*
         byte[] cipherText = cipher.doFinal(input.getBytes());
-        return Base64.getEncoder()
-                .encodeToString(cipherText);
+        return DatatypeConverter.printBase64Binary((cipherText));
+ */
+
+        byte[] cipherText = cipher.doFinal(input.getBytes());
+        //return Base64.getEncoder().encodeToString(cipherText);
+        return cipherText;
     }
 
     /*
@@ -33,8 +36,11 @@ public class AES_256_CBC_Converter {
         Cipher cipher = Cipher.getInstance(algorithm);
         cipher.init(Cipher.DECRYPT_MODE, key, iv);
 
-        byte[] plainText = cipher.doFinal(Base64.getDecoder()
-                .decode(cipherText));
+/*
+        byte[] plainText = cipher.doFinal(DatatypeConverter.parseBase64Binary(cipherText));
+        return new String(plainText);
+*/
+        byte[] plainText = cipher.doFinal(Base64.getDecoder().decode(cipherText));
         return new String(plainText);
     }
 
@@ -44,10 +50,6 @@ public class AES_256_CBC_Converter {
         //Base64.getDecoder().decode(secureKey);
                 DatatypeConverter.parseHexBinary(secureKey);
 
-        String temp = new String(decodedKey, StandardCharsets.UTF_8);
-        System.out.println(temp);
-
-        //secureKey.getBytes();
         SecretKey key = new SecretKeySpec(decodedKey, 0, decodedKey.length, secureKeyAlgorithm);
         return key;
     }
