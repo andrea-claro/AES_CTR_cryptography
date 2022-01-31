@@ -1,3 +1,4 @@
+import aes.cbc.AES_256_CBC_Converter;
 import org.codehaus.jettison.json.JSONObject;
 
 import javax.crypto.SecretKey;
@@ -8,8 +9,8 @@ import java.util.Base64;
 
 public class Test_AES_256_CBC {
 
-    private static final String SECURE_KEY = "72B894FC6F9CD2BCC63CFF33DFC0CE33DA2BB5FE86E4703721DA670DEF9CC3B4";
-    private static final String IV = "15C17719D893F6CDC05914948345614A";
+    private static final String SECURE_KEY = "***";
+    private static final String IV = "***";
 
     private static final String CIPHER_ALGORITHM = "AES/CBC/PKCS5PADDING";
     private static final String SECURE_KEY_ALGORITHM = "AES";

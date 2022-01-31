@@ -1,3 +1,5 @@
+import aes.ctr.AES_128_CTR_Converter;
+
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import java.io.*;
@@ -11,7 +13,7 @@ public class Test_AES_128_CTR {
 
     private static final String CIPHER_ALGORITHM = "AES/CTR/NoPadding";
     private static final String SECURE_KEY_ALGORITHM = "AES";
-    private static final String SECURE_KEY = "416c6d61766976614032303231213f5f";
+    private static final String SECURE_KEY = "***";
 
     public static void main(String[] args) {
 
